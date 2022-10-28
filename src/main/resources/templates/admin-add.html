@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sportswear - Add administrator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div th:insert="layout/header :: adminsharedheader"></div>
+    <div class="text-center">
+        <h2 class="display-4" style="margin-top: 100px">Add administrator</h2>
+    <form style="width: 20%; margin: auto" action="#" th:action="@{/admin-add}" th:object="${signUpModel}" method="post">
+        <div class="form-group">
+            <label>Nickname</label>
+            <input type="text" class="form-control" th:field="*{nickname}" />
+        </div>
+        <div>
+            <label>Password*</label>
+            <input type="password" class="form-control" th:field="*{passwd}" />
+            <small class="form-text text-muted">*should contain at least 8 symbols</small>
+        </div>
+        <div>
+            <label>Repeat password</label>
+            <input type="password" class="form-control" th:field="*{confirm}" />
+            <small class="form-text text-warning">Created account will be granted with administrator rights</small>
+        </div>
+        <button type="submit" class="btn btn-lg btn-outline-primary" style="margin-top: 10px">Add</button>
+    </form>
+    <p class="text-danger" th:text="${error}"></p>
+    <p class="text-success" th:text="${successMessage}"></p>
+    </div>
+    <div th:insert="layout/footer :: adminfooter"></div>
+</body>
+</html>

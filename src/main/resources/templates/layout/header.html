@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div th:fragment="sharedheader" class="fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <a class="navbar-brand" style="font-family: 'Courier New', monospace;
+            font-size: 24px"><b>Sportswear</b></a>
+        <a class="navbar-brand" th:href="@{~/products-view}">Products</a>
+        <a class="navbar-brand" th:href="@{~/brands-view}">Brands</a>
+        <a class="navbar-brand" th:href="@{~/orders-view}">My orders</a>
+        <a class="navbar-brand" th:href="@{~/privacy-policy}">Privacy policy</a>
+        <a class="btn btn-lg btn-danger" style="margin-left: 850px" th:href="@{~/start-page}">Logout</a>
+    </nav>
+</div>
+
+<div th:fragment="adminsharedheader" class="fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <a class="navbar-brand" style="font-family: 'Courier New', monospace;
+            font-size: 24px"><b>Sportswear</b></a>
+        <a class="navbar-brand" th:href="@{~/products-view-admin}">Products</a>
+        <a class="navbar-brand" th:href="@{~/brands-view-admin}">Brands</a>
+        <a class="navbar-brand" th:href="@{~/products-add}">Add product</a>
+        <a class="navbar-brand" th:href="@{~/products-manage}">Manage products</a>
+        <a class="navbar-brand" th:href="@{~/orders-manage}">Manage orders</a>
+        <a class="navbar-brand" th:href="@{~/admin-add}">Add administrator</a>
+        <a class="navbar-brand" th:href="@{~/privacy-policy-admin}">Privacy policy</a>
+        <a class="btn btn-lg btn-danger" style="margin-left: 320px" th:href="@{~/start-page}">Logout</a>
+    </nav>
+</div>
+</body>
+</html>
