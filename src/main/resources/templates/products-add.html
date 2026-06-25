@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sportswear - Add product</title>
+    <title>Додати товар</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <div th:insert="layout/header :: adminsharedheader"></div>
 <div class="text-center">
-    <h2 class="display-4" style="margin-top: 100px">Add product</h2>
+    <h2 class="display-4" style="margin-top: 100px">Add a new item</h2>
       <form style="width: 25%; margin: auto" action="#" th:action="@{/products-add}" th:object="${productInfo}" method="post">
         <div class="form-group">
-            <label>Manufacturer</label>
+            <label>Brand</label>
             <select class="form-control" th:field="*{manufacturerId}">
                 <option th:each="brand : ${manufacturers}" th:value="${brand.manufacturerId}" th:text="${brand.name}"></option>
             </select>
         </div>
         <div class="form-group">
-            <label>Model</label>
+            <label>Item name</label>
             <input type="text" th:field="*{name}" class="form-control">
         </div>
         <div class="form-group">
@@ -28,7 +28,7 @@
             <label>Price</label>
             <input type="number" min="0" th:field="*{price}" class="form-control">
         </div>
-        <button type="submit" class="btn btn-lg btn-outline-primary">Add</button>
+        <button type="submit" class="btn btn-lg btn-outline-primary">Create</button>
     </form>
 </div>
 <div th:insert="layout/footer :: adminfooter"></div>

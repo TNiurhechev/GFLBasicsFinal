@@ -3,11 +3,13 @@ package ua.niurhechev.sportswear.controllers;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.niurhechev.sportswear.models.*;
+import ua.niurhechev.sportswear.repositories.OrderRepository;
 import ua.niurhechev.sportswear.services.ManufacturerService;
 import ua.niurhechev.sportswear.services.OrderService;
 import ua.niurhechev.sportswear.services.ProductService;
 import ua.niurhechev.sportswear.services.UserService;
 
+import javax.jms.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +20,8 @@ public class SportswearController {
     private final ManufacturerService manufacturerService;
     private final OrderService orderService;
 
-    public SportswearController(UserService userService, ProductService productService, ManufacturerService manufacturerService, OrderService orderService) {
+    public SportswearController(UserService userService, ProductService productService,
+                                ManufacturerService manufacturerService, OrderService orderService) {
         this.userService = userService;
         this.productService = productService;
         this.manufacturerService = manufacturerService;
@@ -50,6 +53,7 @@ public class SportswearController {
     @GetMapping("sign-up")
     public String signUpGet(Model model){
         model.addAttribute("signUpModel", new SignUpModel());
+        model.addAttribute("k", 0);
         return "sign-up";
     }
 
@@ -257,10 +261,88 @@ public class SportswearController {
     }
 
     @PostMapping("orders-view")
-    public String ordersViewPost(@RequestParam(name = "customerName") String customerName, Model model) {
+    public String ordersViewPost(@RequestParam(name = "customerName") String customerName, Model model) throws JMSException {
+        Connection connection = new Connection() {
+            @Override
+            public Session createSession(boolean b, int i) throws JMSException {
+                return null;
+            }
+            @Override
+            public Session createSession(int i) throws JMSException {
+                return null;
+            }
+            @Override
+            public Session createSession() throws JMSException {
+                return null;
+            }
+            @Override
+            public String getClientID() throws JMSException {
+                return null;
+            }
+            @Override
+            public void setClientID(String s) throws JMSException {
+            }
+            @Override
+            public ConnectionMetaData getMetaData() throws JMSException {
+                return null;
+            }
+            @Override
+            public ExceptionListener getExceptionListener() throws JMSException {
+                return null;
+            }
+
+            @Override
+            public void setExceptionListener(ExceptionListener exceptionListener) throws JMSException {
+
+            }
+
+            @Override
+            public void start() throws JMSException {
+
+            }
+
+            @Override
+            public void stop() throws JMSException {
+
+            }
+
+            @Override
+            public void close() throws JMSException {
+
+            }
+
+            @Override
+            public ConnectionConsumer createConnectionConsumer(Destination destination, String s, ServerSessionPool serverSessionPool, int i) throws JMSException {
+                return null;
+            }
+
+            @Override
+            public ConnectionConsumer createSharedConnectionConsumer(Topic topic, String s, String s1, ServerSessionPool serverSessionPool, int i) throws JMSException {
+                return null;
+            }
+
+            @Override
+            public ConnectionConsumer createDurableConnectionConsumer(Topic topic, String s, String s1, ServerSessionPool serverSessionPool, int i) throws JMSException {
+                return null;
+            }
+
+            @Override
+            public ConnectionConsumer createSharedDurableConnectionConsumer(Topic topic, String s, String s1, ServerSessionPool serverSessionPool, int i) throws JMSException {
+                return null;
+            }
+        };
+        try(Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE); ) {
+            if(!OrderRepository.class.isInterface()) {
+                MessageConsumer consumer = session.createConsumer((Queue) orderService);
+                List<Order> ordersMSG = orderService.getByCustomer(customerName);
+            }
+        }
         List<Order> orders = orderService.getByCustomer(customerName);
         model.addAttribute("orders", orders);
         return "orders-view";
+        /*List<Order> orders = orderService.getByCustomer(customerName);
+        model.addAttribute("orders", orders);
+        return "orders-view";*/
     }
 
     @GetMapping("orders-manage")

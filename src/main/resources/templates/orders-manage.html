@@ -2,19 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Sportswear - Manage orders</title>
+    <title>Active orders</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
     <div th:insert="layout/header :: adminsharedheader"></div>
     <div class="text-center">
-        <h2 class="display-4" style="margin-top: 100px">Manage orders</h2>
+        <h2 class="display-4" style="margin-top: 100px">Active orders</h2>
         <table class="table table-striped">
-            <thead class="thead-dark">
+            <thead class="thead">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Product</th>
-                <th scope="col">Customer</th>
+                <th scope="col">Item</th>
+                <th scope="col">Buyer</th>
                 <th scope="col">Address</th>
                 <th scope="col"></th>
             </tr>
@@ -29,7 +29,7 @@
             </tr>
             </tbody>
         </table>
-        <p class="text-muted">Mark received orders as <b class="text-success">"Delivered"</b></p>
+        <p class="text-muted">Orders that were received to be marked as <b class="text-success">"Delivered"</b></p>
     </div>
     <div th:insert="layout/footer :: adminfooter"></div>
 </body>
